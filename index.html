@@ -1,0 +1,34 @@
+<html>
+<head>
+<title>Upload Test</title>
+<link href="http://192.168.1.100:12345/css/jquery-ui-1.8.16.custom.css" media="screen" rel="StyleSheet" type="text/css">  
+<link href="http://192.168.1.100:12345/css/web_socket_file_uploader.css" media="screen" rel="StyleSheet" type="text/css">
+
+<script type="text/javascript" src="http://192.168.1.100:12345/js/flash_detect.js"></script>
+<script type="text/javascript" src="http://192.168.1.100:12345/js/browser_test.js"></script>
+<script type="text/javascript" src="http://192.168.1.100:12345/js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="http://192.168.1.100:12345/js/jquery-ui-1.8.16.custom.min.js"></script>
+<script type="text/javascript" src="http://192.168.1.100:12345/js/init.js"></script>
+<script type="text/javascript">
+  var allowedTypes = "doc|docx|pdf|ppt|pptx|odp|odt|mpeg|mpg|mpe|mov|avi|movie|mp3|wav|midi";
+</script>
+</head>
+<body>
+<div class="file_uploader">
+  <h2>File Upload</h2>
+  <form id="uploadForm" onsubmit="return false;" enctype="multipart/form-data">
+  <div class="file_progress_bar">
+    <span class="file_information" name="file_information"></span>
+    <input class="file_browse_button" type="button" value="Browse">
+    <input class="file_upload_button" type="button" value="Upload">
+    <input class="file_reupload_button" type="button" value="Reupload">
+    <input class="file_pause_button" type="button" value="Pause">
+    <input class="file_resume_button" type="button" value="Resume">
+    <input class="file_cancel_button" type="button" value="Cancel">
+    <span class="file_progress" name="file_progress"></span>
+    <input class="file_name_input" name="file_name_input" type="file">
+  </div>
+  </form>
+</div>
+</body>
+</html>
