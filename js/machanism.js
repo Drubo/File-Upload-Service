@@ -8,7 +8,7 @@ function WebSocketFileUploader(file_container, block_size)
   var paused_upload;
 
   var wsc;
-  var reader;
+  var reader = new FileReader();
   var blob;
   
   var start_time;
@@ -167,8 +167,6 @@ function WebSocketFileUploader(file_container, block_size)
 
   function read_slice(start, length) 
   {
-	reader = new FileReader();
-    
 	reader.onabort = onabort;
     reader.onerror = onerror;
     reader.onloadend = onloadend;
