@@ -1,7 +1,7 @@
 **Information about the Service**
 ***
 
-This service uses **Node JS** for the server. There are two servers integrated with this service. **File Upload** server and **Static File** server. Static File requested from the browser will be served by this server and this server can handle File Upload also.
+This service uses **Node JS** for the server. There are two servers integrated with this service. **File Upload** server and **Static File** server. Static File requested from the browser is served by this server and this server can handle File Upload also.
 
 This server will handle the following types of Upload:
 
