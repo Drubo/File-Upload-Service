@@ -156,8 +156,6 @@ function WebSocketFileUploader(file_container, block_size)
   }
   
   function read_file(){
-	reader = new FileReader();
-      
     if (file.webkitSlice) {
     	blob = file.webkitSlice();
     } else if (file.mozSlice) {
