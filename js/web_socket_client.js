@@ -11,7 +11,6 @@ function WebSocketClient(host)
 
   this.initialize = function(data) 
   {
-    if (!supported()) return false;
     if (!connect()) return false;
     return true;
   }
@@ -37,23 +36,9 @@ function WebSocketClient(host)
     wsc.socket.close();
   }
 
-  // Privaleged 
-
-  function supported()
-  {
-    if (!("WebSocket" in window)){
-    	if(!("MozWebSocket" in window)){
-    		return false;
-    	}
-    }
-    return true;
-  }
-
   function connect()
   {
     try {
-      
-      window.WebSocket = window.WebSocket || window.MozWebSocket;
       
       wsc.socket = new WebSocket(host, 'fus');
       

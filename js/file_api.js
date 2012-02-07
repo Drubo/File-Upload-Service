@@ -103,9 +103,6 @@
 	};
 	
 	FileReader.__takeAction = function(){
-		//alert(fileSize);
-		//alert(fileName);
-		//alert(fileData);
 		window.wsfu.fileSelected(fileName, fileSize, fileData);
 	}
 	// Called by Flash.
