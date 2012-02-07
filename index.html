@@ -17,22 +17,22 @@
 <body>
 <div class="file_uploader">
   <h2>File Upload</h2>
-  <form id="uploadForm" onsubmit="return false;" enctype="multipart/form-data">
-  <div class="file_progress_bar">
-    <span class="file_information" name="file_information"></span>
-    <div id="browse_botton_div" style="float: left">
-      <input class="file_browse_button" type="button" value="Browse">
-    </div>
-    <div style="position: relative; float: left; margin-left: 8px;">
-	    <input class="file_upload_button" type="button" value="Upload">
-	    <input class="file_reupload_button" type="button" value="Reupload">
-	    <input class="file_pause_button" type="button" value="Pause">
-	    <input class="file_resume_button" type="button" value="Resume">
-	    <input class="file_cancel_button" type="button" value="Cancel">
-	    <span class="file_progress" name="file_progress"></span>
-	    <input class="file_name_input" name="file_name_input" type="file">
-    </div>
-  </div>
+  <form id="uploadForm" method="post" enctype="multipart/form-data">
+	  <div class="file_progress_bar">
+	    <span class="file_information" name="file_information"></span>
+	    <div id="browse_botton_div" style="float: left">
+	      <input class="file_browse_button" type="button" value="Browse">
+	    </div>
+	    <div style="position: relative; float: left; margin-left: 8px;">
+		    <input class="file_upload_button" type="button" value="Upload">
+		    <input class="file_reupload_button" type="button" value="Reupload">
+		    <input class="file_pause_button" type="button" value="Pause">
+		    <input class="file_resume_button" type="button" value="Resume">
+		    <input class="file_cancel_button" type="button" value="Cancel">
+		    <span class="file_progress" name="file_progress"></span>
+		    <input class="file_name_input" name="file_name_input" id="file_name_input" type="file">
+	    </div>
+	  </div>
   </form>
 </div>
 </body>
