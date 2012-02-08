@@ -1,32 +1,57 @@
 function xhr_upload(){
 	var formData = new FormData();
-	var xhr = new XMLHttpRequest();
-
+	try{
+		var xhr = new XMLHttpRequest();
+	}catch(e){
+		try{
+			var xhr = new ActiveXObject("Microsoft.XMLHttp"); //IE6 or Older
+		}catch(e){
+			
+		}
+	}
+	
+	source.addEventListener('progress', function(e){console.log(e);}, false);
+	
 	var onProgress = function(e) {
-	  if (e.lengthComputable) {
-	    var percentComplete = (e.loaded/e.total)*100;
-	  }
-	};
-
-	var onReady = function(e) {
-	 // ready state
+	  console.log(e);
+	  //if (e.lengthComputable) {
+	    //var percentComplete = (e.loaded/e.total)*100;
+	    //alert(percentComplete);
+	  //}else{
+		  //console.log('Unable to Compute Progress');
+	  //}
 	};
 
 	var onError = function(e) {
 	  // something went wrong with upload
-	  alert('Error: '+e.total);
+	  //console.log(e);
+	  //console.log('Error');
 	};
-
+	
+	var onLoad = function(e){
+		//console.log(e);
+	};
+	
+	var onReady = function(e){
+		//console.log(e);
+	};
+	
 	formData.append('file_name_input', file_name_input[0].files[0]);
-	xhr.open('post', 'http://hostFromServer/upload', true);
 	xhr.addEventListener('error', onError, false);
-	xhr.addEventListener('progress', onProgress, false);
+	//xhr.addEventListener('progress', onProgress, false);
+	xhr.addEventListener('load', onLoad, false);
+	xhr.addEventListener('readystatechange', onReady, false);
+	xhr.open('post', 'http://hostFromServer/upload', true);
 	xhr.send(formData);
-	xhr.addEventListener('readystatechange', onReady, false);	
+}
+
+function xhr_cancel(){
+	xhr.cancel(formData);
 }
 
 var fc = $('.file_uploader');
 var file_progress_bar = fc.find('.file_progress_bar');
+var upload_form = fc.find('#uploadForm');
 var file_progress = fc.find('.file_progress');
 var file_information = fc.find('.file_information');
 var file_upload_button = fc.find('.file_upload_button');
@@ -79,7 +104,7 @@ function bind_events(){
     });
   
    file_cancel_button.bind('click', {uploader: this}, function(e){
-	  
+	  xhr_cancel();
 	  return false;
    });
 }
