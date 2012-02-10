@@ -10,16 +10,14 @@ function xhr_upload(){
 		}
 	}
 	
-	source.addEventListener('progress', function(e){console.log(e);}, false);
-	
 	var onProgress = function(e) {
-	  console.log(e);
-	  //if (e.lengthComputable) {
-	    //var percentComplete = (e.loaded/e.total)*100;
-	    //alert(percentComplete);
-	  //}else{
-		  //console.log('Unable to Compute Progress');
-	  //}
+	  //var ary = e.target.responseText.split("\n");
+	  //ary.forEach(function(data){
+		//  var pcs = data.split("||");
+		  //var percentComplete = (pcs[0].split(":")[1]/pcs[1].split(":")[1])*100;
+		  //console.log(percentComplete);
+	  //});
+		console.log(e.target.responseText);
 	};
 
 	var onError = function(e) {
@@ -38,11 +36,15 @@ function xhr_upload(){
 	
 	formData.append('file_name_input', file_name_input[0].files[0]);
 	xhr.addEventListener('error', onError, false);
-	//xhr.addEventListener('progress', onProgress, false);
+	xhr.addEventListener('progress', onProgress, false);
 	xhr.addEventListener('load', onLoad, false);
 	xhr.addEventListener('readystatechange', onReady, false);
 	xhr.open('post', 'http://hostFromServer/upload', true);
 	xhr.send(formData);
+}
+
+function makeObject(obj){
+	return eval("(" + obj + ")");
 }
 
 function xhr_cancel(){

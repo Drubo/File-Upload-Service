@@ -290,7 +290,12 @@ return;
       file['name'] = fileName;
       file['size'] = fileSize;
       blob = fileData;
-
+      //var byteArray = new Uint8Array(fileData);
+ //console.log(byteArray);     
+   //   for (var i = 0; i < byteArray.byteLength; i++) { 
+    //	  blob += byteArray[i];
+     // }
+console.log(blob);
       file_information.html(file['name']);
       file_progress.html('');
       file_buttons.hide();

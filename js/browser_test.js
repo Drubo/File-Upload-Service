@@ -61,19 +61,4 @@ window.onload = function() {
 	  }
 	  
 	  loadScript('http://192.168.1.100:12345/client.js');
-	  
-	  function enableEvent(file){
-		  var head      = document.getElementsByTagName('head')[0];
-	      var script    = document.createElement('script');
-	      script.type   = 'text/javascript';
-	      script.src = file;
-	      script.onload = script.onreadystatechange = function() {
-		     // prevent memory leak in IE
-		     //head.removeChild(script);
-		     script.onload = null;
-		  };
-		  head.appendChild(script);
-	  }
-	  
-	  enableEvent('http://192.168.1.100:12345/event.js');
 }
