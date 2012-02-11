@@ -31,3 +31,20 @@ This server will handle the following types of Upload:
 5.  IE 5, IE 5.5, IE 6, IE 7.x - IE 9.x, IE 10 - via Silverlight extension, IE 10 (from Windows 8 developer preview)
 
 6.  Netscape 7+
+
+
+**Current Work Flow:**
+
+Checks if browser support `FileAPI`
+	Checks if browser support `WebSocket`
+		fallback to `Socket Based Upload`
+	else
+		Checks if browser support `Flash 10+`
+			fallback to `Flash Based Upload`
+		else
+			Checks if browser support `Xhr Polling`
+				fallback to `XHR Based Upload`
+			else
+				fallback to `iFrame Based Upload`
+else
+	fallback to `iFrame Based Upload`
