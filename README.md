@@ -35,16 +35,16 @@ This server will handle the following types of Upload:
 
 **Current Work Flow:**
 
-    Checks if browser support `FileAPI`  
-        Checks if browser support `WebSocket`  
-            fallback to `Socket Based Upload`  
+    Checks if browser support **FileAPI**  
+        Checks if browser support **WebSocket**  
+            fallback to **Socket Based Upload**  
         else  
-            Checks if browser support `Flash 10+`  
-                fallback to `Flash Based Upload`  
+            Checks if browser support **Flash 10+**  
+                fallback to **Flash Based Upload**  
             else  
-                Checks if browser support `Xhr Polling`  
-                    fallback to `XHR Based Upload`  
+                Checks if browser support **Xhr Polling**  
+                    fallback to **XHR Based Upload**  
                 else  
-                    fallback to `iFrame Based Upload`  
-else  
-    fallback to `iFrame Based Upload`  
+                    fallback to **iFrame Based Upload**  
+    else  
+        fallback to **iFrame Based Upload**  
