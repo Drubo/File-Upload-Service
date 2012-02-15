@@ -5,7 +5,6 @@ var start_file_index;
 
 var fc = $('.file_uploader');
 var file_progress_bar = fc.find('.file_progress_bar');
-var upload_form = fc.find('#uploadForm');
 var file_progress = fc.find('.file_progress');
 var file_information = fc.find('.file_information');
 var file_upload_button = fc.find('.file_upload_button');
@@ -17,8 +16,12 @@ var file_resume_button = fc.find('.file_resume_button');
 var file_reupload_button = fc.find('.file_reupload_button');
 var file_name_input = fc.find('.file_name_input');
 var file_buttons = fc.find(':button');
+var upload_form = $('<form id="uploadForm" method="post" enctype="multipart/form-data">');
+upload_form.append(file_name_input);
+fc.append(upload_form);
 
 var allowed_types = typesFromServer;
+var filename, ext;
 
 reset_upload();
 bind_events();
@@ -63,6 +66,8 @@ function xhr_upload(){
 			file_progress_bar.progressbar({value: 100});
 			xhr = null;
 			formData = null;
+			upload_form.remove('.file_name_input');
+			fc.remove('#uploadForm');
 		}
 	};
 	
@@ -82,72 +87,15 @@ function xhr_upload(){
 function xhr_cancel(){
 	try{
 		xhr.abort();
+		xhr = null;
+		formData = null;
+		upload_form.remove('.file_name_input');
+		fc.remove('#uploadForm');
 		reset_upload();
 	}catch(e){
 		
 	}
 }
-
-function calculate_eta(file_index, file_size){
-  var delta_ms = Date.now() - start_time;
-  var rate = (file_index- start_file_index) / delta_ms; 
-  var remaining_ms = (file_size - file_index) / rate; 
-  var delta_hr = parseInt(Math.floor(remaining_ms/3600000));
-  remaining_ms -= delta_hr*3600000;
-  var delta_min = parseInt(Math.floor(remaining_ms/60000));
-  remaining_ms -= delta_min*60000;
-  var delta_sec = parseInt(Math.floor(remaining_ms/1000));
-  if (delta_sec>10) delta_sec = parseInt(Math.floor(delta_sec/10)*10);
-  var eta = "";
-  if (delta_sec>0) eta = delta_sec + " secs";
-  if (delta_min>0) eta = delta_min + " mins";
-  if (delta_hr>0) eta = delta_hr + " hours";
-  if (delta_ms>5000) file_progress.html(eta);  
-}
-
-function reset_upload(){
-  file_buttons.hide();
-  file_browse_button.show();
-  file_browse_button.show();
-  cancelled_upload = false;
-  paused_upload = false;
-  file_information.html('');
-  file_progress.html('');
-  file_progress_bar.progressbar({value:0});
-}
-
-function validate(){
-	if(allowedTypes!='undefined'){
-		allowed_types = allowedTypes;
-	}
-
-	var parts = file_name_input[0].files[0].name.split('.');
-	var ext = parts[parts.length-1];
-	  
-	//Check for valid file type
-	var ary = allowed_types.split('|');
-	var test = ext in oc(ary);
-	if (!test) {
-		reset_upload();
-		file_information.html("You are not allowed to upload this type of file.");
-		return;
-	}
-	
-	if(file_name_input[0].files[0].size > maxFileSize){
-		reset_upload();
-		file_information.html("This file is too large to upload...");
-		return;
-	}
-}
-
-function oc(a){
-  var o = {};
-  for(var i=0;i<a.length;i++)
-  {
-    o[a[i]]='';
-  }
-  return o;
-};
 
 function bind_events(){
    // Start upload button
@@ -164,7 +112,9 @@ function bind_events(){
   });
   
   file_name_input.bind('change', function(e) {
-      file_information.html(file_name_input[0].files[0].name);
+	  filename = file_name_input.val().toLowerCase().split(/[\\\/]/).pop();
+	  ext = filename.split(".").pop();
+      file_information.html(filename);
       file_progress.html('');
       file_buttons.hide();
       file_browse_button.show();
